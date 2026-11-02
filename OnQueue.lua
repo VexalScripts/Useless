@@ -1,7 +1,7 @@
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
-
+getgenv().AutoExecuteOnTeleport = true
 local queue = queue_on_teleport or queueonteleport
 if queue then
     queue([[
