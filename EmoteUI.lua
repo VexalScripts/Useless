@@ -1,19 +1,28 @@
 local a=game:GetService('Players')local b=game:GetService('ReplicatedStorage')local c=game:
-GetService('UserInputService')local d=game:GetService('TweenService')local e=require(b:
-WaitForChild('Emotes'):WaitForChild('EmotesDatabase'))local f=b:WaitForChild('Animations')local g=a
-.LocalPlayer local h={Text=Color3.fromRGB(245,246,248),White=Color3.new(1,1,1),Muted=Color3.
-fromRGB(135,141,151),Outline=Color3.fromRGB(46,48,55),Green=Color3.fromRGB(87,242,135),Red=Color3.
-fromRGB(237,66,69),Accent=Color3.fromRGB(114,137,218)}local i={MainTop=Color3.fromRGB(22,23,27),
-MainBottom=Color3.fromRGB(11,12,14),HeaderTop=Color3.fromRGB(21,22,26),HeaderBottom=Color3.fromRGB(
-17,18,21),RowLeft=Color3.fromRGB(46,50,58),RowRight=Color3.fromRGB(20,22,26),RowHoverLeft=Color3.
-fromRGB(68,74,86),RowHoverRight=Color3.fromRGB(34,38,45)}local j=ColorSequence.new({
-ColorSequenceKeypoint.new(0,Color3.fromRGB(120,130,150)),ColorSequenceKeypoint.new(0.5,Color3.
-fromRGB(245,246,248)),ColorSequenceKeypoint.new(1,Color3.fromRGB(120,130,150))})local k=280 local l
-=44 local m=320 local n=l local o=10 local p=8 local function new(q,r,s)local t=Instance.new(q)for
-u,v in pairs(r)do t[u]=v end t.Parent=s return t end local function corner(q,r)return new(
-'UICorner',{CornerRadius=UDim.new(0,r)},q)end local function gradient(q,r,s,t)return new(
-'UIGradient',{Color=ColorSequence.new(r,s),Rotation=t or 0},q)end local function tween(q,r,s,t,u)
-local v=d:Create(q,TweenInfo.new(r,t or Enum.EasingStyle.Quad,u or Enum.EasingDirection.Out),s)v:
+GetService('UserInputService')local d=game:GetService('TweenService')local function safeRequire(e,f
+)f=f or 5 local function resolve(g)if typeof(g)=='Instance'then return g end if type(g)~='string'
+then return nil,'expected Instance or string, got '..typeof(g)end if g:find('%.')then local h=game:
+GetService('ReplicatedStorage')for i in g:gmatch('[^%.]+')do if not h then return nil,
+"path broke at '"..i.."'"end h=h:FindFirstChild(i)or h:WaitForChild(i,f)end if not h then return
+nil,"could not resolve '"..g.."'"end return h end local h=game:GetService('ReplicatedStorage')local
+i=h:FindFirstChild(g)or h:WaitForChild(g,f)if not i then return nil,"'"..g..
+"' not found in ReplicatedStorage"end return i end local g,h=resolve(e)if not g then warn(
+'[safeRequire] '..h)return nil,h end local i,j=pcall(require,g)if not i then local k=tostring(j)
+warn('[safeRequire] failed to require '..g:GetFullName()..': '..k)return nil,k end return j end
+local e=safeRequire(b:WaitForChild('Emotes'):WaitForChild('EmotesDatabase'))local f=b:WaitForChild(
+'Animations')local g=a.LocalPlayer local h={Text=Color3.fromRGB(245,246,248),White=Color3.new(1,1,1
+),Muted=Color3.fromRGB(135,141,151),Outline=Color3.fromRGB(46,48,55),Green=Color3.fromRGB(87,242,
+135),Red=Color3.fromRGB(237,66,69),Accent=Color3.fromRGB(114,137,218)}local i={MainTop=Color3.
+fromRGB(22,23,27),MainBottom=Color3.fromRGB(11,12,14),HeaderTop=Color3.fromRGB(21,22,26),
+HeaderBottom=Color3.fromRGB(17,18,21),RowLeft=Color3.fromRGB(46,50,58),RowRight=Color3.fromRGB(20,
+22,26),RowHoverLeft=Color3.fromRGB(68,74,86),RowHoverRight=Color3.fromRGB(34,38,45)}local j=
+ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(120,130,150)),ColorSequenceKeypoint.
+new(0.5,Color3.fromRGB(245,246,248)),ColorSequenceKeypoint.new(1,Color3.fromRGB(120,130,150))})
+local k=280 local l=44 local m=320 local n=l local o=10 local p=8 local function new(q,r,s)local t=
+Instance.new(q)for u,v in pairs(r)do t[u]=v end t.Parent=s return t end local function corner(q,r)
+return new('UICorner',{CornerRadius=UDim.new(0,r)},q)end local function gradient(q,r,s,t)return
+new('UIGradient',{Color=ColorSequence.new(r,s),Rotation=t or 0},q)end local function tween(q,r,s,t,
+u)local v=d:Create(q,TweenInfo.new(r,t or Enum.EasingStyle.Quad,u or Enum.EasingDirection.Out),s)v:
 Play()return v end local function lerpColor(q,r,s)return Color3.new(q.R+(r.R-q.R)*s,q.G+(r.G-q.G)*s
 ,q.B+(r.B-q.B)*s)end local function tweenGradientColor(q,r,s)local t=q.Color local u=t.Keypoints
 local v=s.Keypoints local w=os.clock()task.spawn(function()while true do local x=os.clock()-w local
