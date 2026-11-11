@@ -1,3 +1,3 @@
 return {
-    mvsd = "v3.6.2"
+    mvsd = "v3.7"
 }
